@@ -1,0 +1,15 @@
+FROM golang:1.25.10-alpine
+
+WORKDIR /app
+
+# Install Air for live reload
+RUN go install github.com/air-verse/air@latest
+
+COPY go.mod ./
+RUN go mod tidy
+
+COPY . .
+
+EXPOSE 8888
+
+CMD ["air", "-c", ".air.toml"]
