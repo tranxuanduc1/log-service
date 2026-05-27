@@ -1,7 +1,8 @@
-package models
+package logactivity
 
 import (
 	"time"
+
 	"github.com/google/uuid"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
@@ -15,8 +16,8 @@ type LogActivity struct {
 	Metadata   datatypes.JSON `gorm:"type:jsonb"                      json:"metadata,omitempty"`
 	CreatedAt  time.Time      `gorm:"type:timestamptz;autoCreateTime" json:"created_at"`
 	UserID     *uuid.UUID     `gorm:"type:uuid"                       json:"user_id,omitempty"`
-
 }
+
 // BeforeCreate auto-generates a UUIDv7 for every new record
 func (l *LogActivity) BeforeCreate(tx *gorm.DB) error {
 	id, err := uuid.NewV7()
